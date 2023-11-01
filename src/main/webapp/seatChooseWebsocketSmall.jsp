@@ -102,7 +102,7 @@ var webSocket;
 		    for(var i = 0; i < messageData.length ; i++ ){
 		    	 var seatTypeParts = messageData[i].seatType.split(',');
 		    	 
-		    if (seatElement.dataset.userName !== userName && (seatTypeParts[1] === "buy" ||seatTypeParts[1] ==="inCart") && seatTypeParts[1] !== "soldOut" && seatTypeParts[1] !== "soldReally") {
+		    if (seatElement.dataset.userName !== userName && (seatTypeParts[1] === "buy" || seatTypeParts[1] ==="inCart") && seatTypeParts[1] !== "soldOut" && seatTypeParts[1] !== "soldReally") {
 		    	console.log("處理中~~~~")
 		        otherSelectedSeats.push(messageData[i]);
 		        
@@ -418,12 +418,23 @@ var webSocket;
 			inputMessage.focus();
 		}
 	}
+	var isPurchaseClicked = false;
+	var buyButton = document.querySelector(".BuyIn");
+	var cartButton = document.querySelector(".cart");
+	cartButton.addEventListener("click", function() {
+	    // 設置標誌為 true，表示因為點擊購買按鈕而跳轉頁面
+	    isPurchaseClicked = true;
+	});
+	buyButton.addEventListener("click", function() {
+	    // 設置標誌為 true，表示因為點擊購買按鈕而跳轉頁面
+	    isPurchaseClicked = true;
+	});
 	function disconnect() {
 		var selectElement = document.getElementById("act");
 	    var selectedActivity = selectElement.options[selectElement.selectedIndex].text;
 	    var userName = "${sessionScope.userID}";
-	   
-	    var userType = "disconnect";
+	    var userType = isPurchaseClicked ? "purchase" : "disconnect"; // 設定使用者類型
+	  
 	    if (userName) {
 	        if (webSocket && webSocket.readyState === WebSocket.OPEN) {
 	            var userInfo = {
