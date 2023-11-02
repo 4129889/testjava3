@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>購物車##</title>
+	<title>購物車</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -1760,7 +1760,7 @@ window.addEventListener("popstate", function(){
 			orderArr.reverse();
 			for (let order of orderArr) {
 				for (let orderDetail of order.orderlists) {
-					if (orderDetail.usedType == 1 && orderDetail.reviewContent != undefined) {
+					if (orderDetail.usedType == 1 && (orderDetail.reviewContent != undefined && orderDetail.reviewContent != "")) {
 						console.log(orderDetail.reviewContent);
 						listTb5.innerHTML += `
 						<tr class="table_row1">
